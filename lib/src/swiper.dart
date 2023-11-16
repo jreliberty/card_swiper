@@ -918,9 +918,9 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     //Array below this line, '0' index is 1.0, which is the first item show in swiper.
     _startIndex = isRightSide ? -1 : -3;
     scales =
-        isRightSide ? [1.0, 1.0, 0.9, 0.8, 0.7] : [0.7, 0.8, 0.9, 1.0, 1.0];
+        isRightSide ? [1.0, 1.0, 0.9, 0.8, 0.7] : [1, 1, 1, 1.0, 1.0];
     opacity =
-        isRightSide ? [1.0, 1.0, 1.0, 0.5, 0.0] : [0.0, 0.5, 1.0, 1.0, 1.0];
+        isRightSide ? [1.0, 1.0, 1.0, 0.5, 0.0] : [0.7, 0.8, 0.9, 1.0, 1.0];
 
     _updateValues();
   }
