@@ -896,13 +896,18 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
           ? [-space, -space / 3 * 2, -space / 3, 0.0, _swiperWidth]
           : [_swiperWidth, 0.0, -space / 3, -space / 3 * 2, -space];
     } else {
-      final space = (_swiperHeight - widget.itemHeight!) * 2 / 3;
+      print(_swiperHeight);
+      print(MediaQuery.of(context).size.height);
+      print(MediaQuery.of(context).size.height - _swiperHeight);
+      print(widget.itemHeight);
+      final space = (_swiperHeight - widget.itemHeight!) / 2;
+      print(space);
       offsets = [
-        -space * 4 / 3 + 100,
-        -space + 100,
-        -space / 3 * 2 + 100,
-        -space / 3 + 100,
-        100.0,
+        0 - space,
+        50 - space,
+        100 - space,
+        150 - space,
+        200 - space,
         _swiperHeight
       ];
     }
@@ -931,6 +936,11 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     if (widget.itemCount > 5)
       opacity = isRightSide ? [1, 1, 1, 1, 1, 1] : [1, 1, 1, 1, 1.0, 1.0];
 
+    final space = (_swiperHeight - widget.itemHeight!);
+    final int nbItems = ((space * 3 / 2) / 50).truncate();
+    for (int i = nbItems - 1; i < 5; i++) {
+      opacity[i] = 0;
+    }
     //length of the values array below
     _animationCount = 6;
 
