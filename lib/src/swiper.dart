@@ -404,7 +404,7 @@ class _SwiperState extends _SwiperTimerMixin {
 
   Widget _wrapTap(BuildContext context, int index) {
     return GestureDetector(
-      // behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.opaque,
       onTap: () => widget.onTap!(index),
       child: widget.itemBuilder!(context, index),
     );
@@ -901,21 +901,16 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
       print(MediaQuery.of(context).size.height - _swiperHeight);
       print(widget.itemHeight);
       final space = (_swiperHeight - widget.itemHeight!) / 2;
-      final offsetElement = widget.itemHeight! / 2;
       print(space);
+      final gapCard = widget.itemHeight! / 2;
       offsets = [
-        -offsetElement - space,
-        -space,
-        offsetElement - space,
-        2 * offsetElement - space,
-        3 * offsetElement - space,
-        4 * offsetElement - space,
+        0 - space,
+        gapCard - space,
+        2 * gapCard - space,
+        3 * gapCard - space,
+        4 * gapCard - space,
+        _swiperHeight
       ];
-      print(widget.itemCount);
-      // if (widget.itemCount < 6)
-      //   for (int i = widget.itemCount + 1; i < 6; i++) {
-      //     offsets[i] = _swiperHeight;
-      //   }
     }
   }
 
@@ -930,23 +925,23 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     super.afterRender();
     final isRightSide = widget.axisDirection == AxisDirection.right;
     if (widget.itemCount == 1)
-      opacity = isRightSide ? [1, 1, 0, 0, 0, 0] : [0,1, 0, 0, 0, 0,];
+      opacity = isRightSide ? [1, 1, 0, 0, 0, 0] : [1, 0, 0, 0, 0, 0];
     if (widget.itemCount == 2)
-      opacity = isRightSide ? [1, 1, 1, 0, 0, 0] : [0, 1, 1, 0, 0, 0];
+      opacity = isRightSide ? [1, 1, 1, 0, 0, 0] : [1, 1, 0, 0, 0, 0];
     if (widget.itemCount == 3)
-      opacity = isRightSide ? [1, 1, 1, 1, 0, 0] : [0, 1, 1, 1, 0, 0];
+      opacity = isRightSide ? [1, 1, 1, 1, 0, 0] : [1, 1, 1, 0, 0, 0];
     if (widget.itemCount == 4)
-      opacity = isRightSide ? [1, 1, 1, 1, 1, 0] : [0, 1, 1, 1.0, 1, 0];
+      opacity = isRightSide ? [1, 1, 1, 1, 1, 0] : [1, 1, 1, 1.0, 0, 0];
     if (widget.itemCount == 5)
-      opacity = isRightSide ? [1, 1, 1, 1, 1, 1] : [0, 1, 1, 1, 1.0, 1];
+      opacity = isRightSide ? [1, 1, 1, 1, 1, 1] : [1, 1, 1, 1, 1.0, 0];
     if (widget.itemCount > 5)
-      opacity = isRightSide ? [1, 1, 1, 1, 1, 1] : [0, 1, 1, 1, 1.0, 1.0];
+      opacity = isRightSide ? [1, 1, 1, 1, 1, 1] : [1, 1, 1, 1, 1.0, 1.0];
 
     final space = (_swiperHeight - widget.itemHeight!);
-    // final int nbItems = ((space * 3 / 2) / 50).truncate();
-    // for (int i = nbItems - 1; i < 5; i++) {
-    //   opacity[i] = 0;
-    // }
+    final int nbItems = ((space * 3 / 2) / 50).truncate();
+    for (int i = nbItems - 1; i < 5; i++) {
+      opacity[i] = 0;
+    }
     //length of the values array below
     _animationCount = 6;
 
